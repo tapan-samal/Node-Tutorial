@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+  </head>
+  <body>
+    <h1>This is Home Page</h1>
+    <!-- EJS Interpolation Syntax -->
+    <!-- Output value -->
+    <h3><%= 4 * 5 %></h3>
+    <h3><%= "tapan".toUpperCase() %></h3>
+    <h3><%= ["React", "Redux", "Express"][2] %></h3>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas
+      nesciunt blanditiis, repudiandae est nihil, doloribus sunt suscipit
+      perferendis molestias sequi voluptatem. Obcaecati architecto earum omnis,
+      perspiciatis quas assumenda distinctio doloribus.
+    </p>
+    <button>Click</button>
+
+    <%- include("includes/footer.ejs") %>
+  </body>
+</html>

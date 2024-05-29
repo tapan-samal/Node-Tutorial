@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roll Dice</title>
+  </head>
+  <body>
+    <h1>Dice random value: <%= diceValue %></h1>
+
+    <!-- Using Conditional Statement -->
+    <% if(diceValue === 6) { %>
+    <h2>Nice! Roll dice again.</h2>
+    <% } %>
+
+    <%- include("includes/footer.ejs") %>
+  </body>
+</html>
