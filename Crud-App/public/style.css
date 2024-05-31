@@ -1,0 +1,17 @@
+h1 {
+  color: rgb(15, 73, 180);
+}
+
+.post {
+  background-color: rgb(150, 196, 197);
+  padding-bottom: 12px;
+}
+
+.user {
+  font-style: italic;
+}
+
+a {
+  font-weight: 600;
+  text-decoration: none;
+}
