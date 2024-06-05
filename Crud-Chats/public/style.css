@@ -1,0 +1,20 @@
+.chats {
+  background-color: cadetblue;
+  padding: 4px 22px;
+  border-radius: 4px;
+  display: inline-block;
+  letter-spacing: 1.5px;
+}
+
+.msg {
+  color: beige;
+  padding: 6px 16px;
+  background-color: rgb(14, 69, 153);
+  border-radius: 6px;
+}
+
+.button{
+  display: flex;
+  gap: 12px;
+  border-radius: 4px;
+}
