@@ -1,65 +1,49 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 
-// console.dir(app);
-let PORT = 4000;
+const PORT = 4400;
 
-//Create server//
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}!`);
-});
+//Serving static files
+app.use(express.static(path.join(__dirname, "/public/css")));
+app.use(express.static(path.join(__dirname, "/public/js")));
 
-// Handling request//
-app.use((req, res) => {
-  console.log("Request received!");
+//ejs internally require by express
+app.set("view engine", "ejs");
 
-  // Sending response//
-  //Sending String
-  res.send("Response sent!");
+//Make path dynamic, can render from other directory
+app.set("views", path.join(__dirname, "/views"));
 
-  //Sending Object
-  res.send({
-    name: "Node",
-    role: "Developer",
-  });
-  //Sending HTML
-  let code = "<h1>JavaScript</h1> <ul><li>React</li><li>Express</li></ul>";
-  res.send(code);
-});
-
-//Routing//
+//express by default search the views file
 app.get("/", (req, res) => {
-  res.send("This is root path");
+  res.render("home.ejs"); //.ejs optional
 });
 
-app.get("/search", (req, res) => {
-  res.send("Search Page");
+app.get("/rolldice", (req, res) => {
+  let diceValue = Math.floor(Math.random() * 6) + 1;
+  res.render("rolldice.ejs", { diceValue });
 });
 
-app.get("/about", (req, res) => {
-  res.send("About Page");
-});
+//Iterate from an array
+// app.get("/insta/:username", (req, res) => {
+//   let followers = ["Steve", "Lilly", "Jhon", "Amenda"];
+//   let { username } = req.params;
+//   res.render("insta.ejs", { username, followers });
+// });
 
-app.get("*", (req, res) => {
-  res.send("Invalid page");
-});
-
-//Path parameters//
-app.get("/:username/:id", (req, res) => {
-  console.log(req.params);
-  let { username, id } = req.params;
-  // res.send(`Welcome to @${username}`)
-  let htmlStr = `<h1>Welcome to @${username}</h1>`;
-  res.send(htmlStr);
-});
-
-//Query strings//
-//Path: http://localhost:4000/search?q=tapan
-app.get("/search", (req, res) => {
-  const { q } = req.query;
-  // res.send(`Search results for query: ${q}`)
-  if (!q) {
-    res.send(`<h1>Nothing search!</h1>`);
+//Iterate from an json file
+app.get("/insta/:username", (req, res) => {
+  const { username } = req.params;
+  const instaData = require("./data.json");
+  const data = instaData[username];
+  console.log(data);
+  if (data) {
+    res.render("insta.ejs", { data });
+  } else {
+    res.render("error.ejs");
   }
-  res.send(`<h1>Search results for query: ${q}</h1>`);
+});
+
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
 });
